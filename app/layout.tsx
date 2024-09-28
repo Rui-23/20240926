@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { inter } from "@/app/ui/fonts";
-import "./ui/globals.css";
+import "@/app/ui/globals.css";
 
 const tiemposLightSerif =  localFont({
   src: "./fonts/TiemposLight.woff",
