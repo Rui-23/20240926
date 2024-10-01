@@ -1,0 +1,46 @@
+button[role="tooltip"]::before {
+  content: attr(aria-label); /* Use the aria-label for the tooltip text */
+  position: absolute;
+  bottom: 135%; /* Position above the button */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+  font-size: 12px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 10;
+}
+
+button[role="tooltip"]::after {
+  content: '';
+  position: absolute;
+  bottom: 100%; /* Positioned above the button */
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 8px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent; /* Triangle pointing down */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 10;
+}
+
+button[role="tooltip"]:hover::before,
+button[role="tooltip"]:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(-5px); /* Add upward push animation */
+}
+
+
+/* .pdfPage {
+  width: 100%;
+  object-fit: contain 150ms ease-in-out;
+  transition: transform ; 
+} */
