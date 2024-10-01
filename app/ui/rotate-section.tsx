@@ -2,17 +2,21 @@
 
 import { Document, Page } from 'react-pdf';
 import type { PDFDocumentProxy } from 'pdfjs-dist';
+import { useState, useCallback } from 'react';
+import { useResizeObserver } from '@wojtekmaj/react-hooks';
+import { PDFDocument, degrees } from 'pdf-lib'; 
+import { saveAs } from 'file-saver';
 
 type PDFFile = string | File | null;
+
+const minZoom = 100;
+const maxZoom = 500;
+
+const resizeObserverOptions = {};
 
 interface rotationProps {
   filePDF:  PDFFile;
   numPages: number | undefined;
-  pageWidth: number;
-  zoomIn: () => void;
-  zoomOut: () => void;
-  maxZoom: number;
-  minZoom: number;
   rotation: Record<number, number>;
   removePDF:() => void;
   rotateAll: () => void;
@@ -20,8 +24,52 @@ interface rotationProps {
   onDocumentLoadSuccess: ({ numPages}: PDFDocumentProxy) => void;
 }
 
+export default function RotateSection({filePDF, onDocumentLoadSuccess, numPages, rotation, rotateAll, rotatePage, removePDF} : rotationProps) {
+  const [pageWidth, setPageWidth] = useState<number>(250); 
+  const [containerRef, setContainerRef] = useState<HTMLElement | null>(null);
 
-export default function RotateSection({filePDF, onDocumentLoadSuccess,rotateAll, numPages, rotation,removePDF, pageWidth, zoomIn, zoomOut, maxZoom, minZoom, rotatePage} : rotationProps) {
+  const onResize = useCallback<ResizeObserverCallback>((entries) => {
+    const [entry] = entries;
+
+    if (entry) {
+      setPageWidth(entry.contentRect.width);
+    }
+  }, []);
+
+  useResizeObserver(containerRef, resizeObserverOptions, onResize);
+
+  const zoomIn = () => {
+    setPageWidth((prevWidth) => Math.min(prevWidth + 50, maxZoom)); 
+  };
+
+  const zoomOut = () => {
+    setPageWidth((prevWidth) => Math.max(prevWidth - 50, minZoom));
+  };
+
+  const handleDownload = async () => {
+    if (!filePDF || !(filePDF instanceof File)) return;
+
+    const fileArrayBuffer = await filePDF.arrayBuffer();
+    const pdfDoc = await PDFDocument.load(fileArrayBuffer);
+
+    // Loop through all pages and apply the rotation
+    const totalPages = pdfDoc.getPageCount();
+    for (let i = 0; i < totalPages; i++) {
+      const page = pdfDoc.getPage(i);
+      const currentRotation = page.getRotation().angle; 
+      const rotationDegrees = rotation[i + 1] || 0;
+      page.setRotation(degrees((currentRotation + rotationDegrees) % 360));
+    }
+
+    const pdfBytes = await pdfDoc.save();
+
+    // Trigger the download
+    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+    //saveAs(blob, filePDF.name); 
+    const originalFileName = filePDF.name.replace(/\.pdf$/i, ''); 
+    const newFileName = `${originalFileName}(pdf.ai-rotated).pdf`; 
+    saveAs(blob, newFileName);
+  };
   
   return (
     <>
@@ -79,6 +127,7 @@ export default function RotateSection({filePDF, onDocumentLoadSuccess,rotateAll,
               className="m-3"
               style={{ maxWidth: `${pageWidth}px`, flex: `0 0 ${pageWidth}px`}}
               key={index}
+              ref={setContainerRef}
               >
                 <div 
                   className="relative cursor-pointer"
@@ -128,7 +177,9 @@ export default function RotateSection({filePDF, onDocumentLoadSuccess,rotateAll,
           <button 
             className="relative group bg-[#FF612F] rounded text-white !w-auto px-[12px] py-[10px] shadow" 
             aria-label="Split and download PDF" 
-            role="tooltip">Download
+            role="tooltip"
+            onClick={handleDownload}
+          >Download
           </button>
         </div> 
       </div>
