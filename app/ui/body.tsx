@@ -5,8 +5,8 @@ import UploadBox from "@/app/ui/upload-box";
 import RotateSection from "@/app/ui/rotate-section";
 import '@/app/ui/body.css';
 
-import { useState } from 'react';
-// import { useResizeObserver } from '@wojtekmaj/react-hooks';
+import { useState} from 'react';
+
 import { pdfjs } from 'react-pdf';
 import type { PDFDocumentProxy } from 'pdfjs-dist';
 
@@ -24,18 +24,6 @@ export default function Body() {
   const [isDragging, setIsDragging] = useState(false);
   const [isDrop, setIsDrop] = useState(false);
   const [rotation, setRotation] = useState<Record<number, number>>({});
-  const [pageWidth, setPageWidth] = useState<number>(250); 
-
-  const minZoom = 100;
-  const maxZoom = 500;
-
-  const zoomIn = () => {
-    setPageWidth((prevWidth) => Math.min(prevWidth + 50, maxZoom)); 
-  };
-
-  const zoomOut = () => {
-    setPageWidth((prevWidth) => Math.max(prevWidth - 50, minZoom));
-  };
 
   const rotateAll = () => {
     if (!numPages) return; 
@@ -54,7 +42,6 @@ export default function Body() {
       ...prev,
       [pageNumber]: ((prev[pageNumber] || 0) + 90),
     }));
-
     //console.log(filePDF.name);
   };
 
@@ -108,7 +95,6 @@ export default function Body() {
   
     const dt = event.dataTransfer;
     const files = dt.files;
-  
     const nextFile = files?.[0];
 
     if (nextFile) {
@@ -137,11 +123,6 @@ export default function Body() {
             rotation={rotation}
             rotateAll={rotateAll}
             removePDF={removePDF}
-            zoomIn={zoomIn}
-            zoomOut={zoomOut}
-            maxZoom={maxZoom} 
-            minZoom={minZoom}
-            pageWidth={pageWidth}
             rotatePage={rotatePage}
             onDocumentLoadSuccess={onDocumentLoadSuccess}
           />
