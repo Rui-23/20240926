@@ -42,7 +42,6 @@ export default function Body() {
       ...prev,
       [pageNumber]: ((prev[pageNumber] || 0) + 90),
     }));
-    //console.log(filePDF.name);
   };
 
   function onDocumentLoadSuccess({ numPages: nextNumPages }: PDFDocumentProxy): void {

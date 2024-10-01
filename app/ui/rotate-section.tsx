@@ -2,8 +2,7 @@
 
 import { Document, Page } from 'react-pdf';
 import type { PDFDocumentProxy } from 'pdfjs-dist';
-import { useState, useCallback } from 'react';
-import { useResizeObserver } from '@wojtekmaj/react-hooks';
+import { useState } from 'react';
 import { PDFDocument, degrees } from 'pdf-lib'; 
 import { saveAs } from 'file-saver';
 
@@ -11,8 +10,6 @@ type PDFFile = string | File | null;
 
 const minZoom = 100;
 const maxZoom = 500;
-
-const resizeObserverOptions = {};
 
 interface rotationProps {
   filePDF:  PDFFile;
@@ -26,17 +23,7 @@ interface rotationProps {
 
 export default function RotateSection({filePDF, onDocumentLoadSuccess, numPages, rotation, rotateAll, rotatePage, removePDF} : rotationProps) {
   const [pageWidth, setPageWidth] = useState<number>(250); 
-  const [containerRef, setContainerRef] = useState<HTMLElement | null>(null);
-
-  const onResize = useCallback<ResizeObserverCallback>((entries) => {
-    const [entry] = entries;
-
-    if (entry) {
-      setPageWidth(entry.contentRect.width);
-    }
-  }, []);
-
-  useResizeObserver(containerRef, resizeObserverOptions, onResize);
+  //const scaleFactor = pageWidth / 250;
 
   const zoomIn = () => {
     setPageWidth((prevWidth) => Math.min(prevWidth + 50, maxZoom)); 
@@ -114,7 +101,7 @@ export default function RotateSection({filePDF, onDocumentLoadSuccess, numPages,
             </svg>
           </button>
         </div>
-
+       
         <Document
           file={filePDF}
           onLoadSuccess={onDocumentLoadSuccess}
@@ -125,10 +112,14 @@ export default function RotateSection({filePDF, onDocumentLoadSuccess, numPages,
           {Array.from(new Array(numPages), (el, index) => ( 
             <div 
               className="m-3"
-              style={{ maxWidth: `${pageWidth}px`, flex: `0 0 ${pageWidth}px`}}
+              style={{ 
+                maxWidth: `${pageWidth}px`, 
+                flex: `0 0 ${pageWidth}px`,
+                // transform: `scale(${scaleFactor})`,
+                // transformOrigin: 'center center'
+              }}
               key={index}
-              ref={setContainerRef}
-              >
+            >
                 <div 
                   className="relative cursor-pointer"
                 >
@@ -143,10 +134,10 @@ export default function RotateSection({filePDF, onDocumentLoadSuccess, numPages,
                     className="overflow-hidden transition-transform"
                   >
                     <div 
-                      className="relative w-full h-full flex flex-col justify-between items-center shadow-md p-3 bg-white hover:bg-gray-50"
+                      className="relative w-full h-full flex flex-col justify-between items-center p-3 shadow-md bg-white hover:bg-gray-50"
                     >
                       <div 
-                        className="rotate-0 shrink"
+                        className="rotate-0 shrink flex justify-center max-w-full"
                         style={{
                           width:'100%',
                           objectFit: 'contain',
@@ -161,7 +152,10 @@ export default function RotateSection({filePDF, onDocumentLoadSuccess, numPages,
                           renderAnnotationLayer = {false}
                           renderTextLayer={false}
                           width={pageWidth-30}
+                          // width={500}
+                          // scale={0.5}
                           onClick={() => rotatePage(index + 1)}
+                          renderMode='canvas'
                         />
                       </div>
                       <div className="w-[90%] text-center shrink-0 text-xs italic overflow-hidden text-ellipsis whitespace-nowrap">{index+1}</div>
@@ -170,7 +164,7 @@ export default function RotateSection({filePDF, onDocumentLoadSuccess, numPages,
                 </div>
             </div> ),
           )}
-        </Document> 
+        </Document>
 
         <div 
           className="flex flex-col justify-center items-center space-y-3 select-none text-[16px] font-medium mt-5">
