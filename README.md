@@ -1,5 +1,5 @@
 <div align="center">
-  <h3 align="center">PDF Page Rotator</h3>
+  <h2 align="center">PDF Page Rotator</h2>
   <div align="center">A clone of <a href="https://pdf.ai/tools/rotate-pdf" target="_blank"><b>PDF.ai</b></a> product, PDF Page Rotator allows users to upload or drag and drop PDF files, rotate individual pages or all pages at once, and download the modified version.</div>
 </div>
 
