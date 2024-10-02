@@ -23,12 +23,12 @@ The **PDF Page Rotator** web app provides an easy and intuitive way to manipulat
 
 ## <a name="features">🔋 Features</a>
 
-- **Drag and Drop Support**: Upload a PDF file from your local computer by dragging it into the app or using the file input.
-- **Rotate Pages**: Click on any individual page to rotate it by 90-degree increments.
-- **Rotate All Pages**: Apply rotation to all pages at once with a 'Rotate All' button.
-- **Zoom In/Out**: Scale PDF pages with zoom buttons, providing feedback when zooming hits the max or min.
-- **Download Rotated PDF**: After rotating pages, users can download the new version of the PDF.
-- **Smooth Animations**: Pages rotate smoothly while maintaining their structure.
+👉 **Drag and Drop Support**: Upload a PDF file from your local computer by dragging it into the app or using the file input.
+👉 **Rotate Pages**: Click on any individual page to rotate it by 90-degree increments.
+👉 **Rotate All Pages**: Apply rotation to all pages at once with a 'Rotate All' button.
+👉 **Zoom In/Out**: Scale PDF pages with zoom buttons, providing feedback when zooming hits the max or min.
+👉 **Download Rotated PDF**: After rotating pages, users can download the new version of the PDF.
+👉 **Smooth Animations**: Pages rotate smoothly while maintaining their structure.
 
 ## <a name="quick-start">🤸 Quick Start</a>
 
