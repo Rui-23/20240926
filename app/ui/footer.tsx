@@ -1,3 +1,7 @@
+'use client';
+
+import Image from 'next/image';
+
 export default function Footer() {
   return (
     <footer className="bg-white" aria-labelledby="footer-heading">
@@ -6,7 +10,7 @@ export default function Footer() {
       md:px-8 lg:px-16 lg:mt-16 border-t border-gray-900/10 pt-16">
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
           <div className="space-y-8">
-            <img className="h-7" src="/favicon.ico" alt="PDF.ai logo"/>
+            <Image className="h-7" src="/favicon.ico" alt="PDF.ai logo" width={32} height={32} />
             <div 
               className="text-sm leading-6 text-gray-600">Chat with any PDF: ask questions, get summaries, find information, and more.
             </div>

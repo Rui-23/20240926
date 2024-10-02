@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "preview": "next preview",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -12,19 +13,23 @@
     "file-saver": "^2.0.5",
     "next": "14.2.13",
     "pdf-lib": "^1.17.1",
-    "react": "^18",
-    "react-dom": "^18",
-    "react-pdf": "^9.1.1"
+    "pdfjs-dist": "^4.4.168",
+    "punycode": "^2.3.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-pdf": "latest"
   },
   "devDependencies": {
     "@types/file-saver": "^2.0.7",
+    "@types/json-schema": "^7.0.15",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "eslint": "^8",
+    "copy-webpack-plugin": "^12.0.2",
+    "eslint": "^8.57.1",
     "eslint-config-next": "14.2.13",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "typescript": "^5.6.2"
   }
 }
