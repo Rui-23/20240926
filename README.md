@@ -1,6 +1,7 @@
-# 📄 PDF Page Rotator
-
-A clone of pdf.ai's product, **PDF Page Rotator** allows users to upload or drag and drop PDF files, rotate individual pages or all pages at once, and download the modified version.
+<div align="center">
+  <h3 align="center">PDF Page Rotator</h3>
+  <div align="center">A clone of <a href="https://pdf.ai/tools/rotate-pdf" target="_blank"><b>PDF.ai</b></a> product, PDF Page Rotator allows users to upload or drag and drop PDF files, rotate individual pages or all pages at once, and download the modified version.</div>
+</div>
 
 ## 📋 <a name="table">Table of Contents</a>
 
