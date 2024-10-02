@@ -6,16 +6,23 @@
   --background: #F7F5EE;
 }
 
-* {
-  padding: 0;
-  margin: 0;
+*, ::after, ::before {
   box-sizing: border-box;
   letter-spacing: normal;
+  border: 0 solid #e5e7eb;
+}
+
+html {
+  line-height: 1.5;
+  font-family: Inter,Segoe UI,Helvetica Neue,sans-serif;
+  font-feature-settings: normal;
+  font-variation-settings: normal;
 }
 
 body {
   background: var(--background);
-  font-size: 16px;
+  margin: 0;
+  line-height: inherit;
 }
 
 @layer utilities {
