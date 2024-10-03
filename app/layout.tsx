@@ -3,6 +3,8 @@ import localFont from "next/font/local";
 import { inter } from "@/app/ui/fonts";
 import "@/app/ui/globals.css";
 
+
+
 export const metadata: Metadata = {
   title: "Free PDF Page Rotator - Rotate Individual or All Pages",
   description: "Rotate individual or all pages in your PDF effortlessly. No downloads or sign-ups. Fast, secure, and user-friendly. Try now!",
