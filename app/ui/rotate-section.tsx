@@ -6,6 +6,10 @@ import { useState } from 'react';
 import { PDFDocument, degrees } from 'pdf-lib'; 
 import { saveAs } from 'file-saver';
 
+const options = {
+  cMapUrl: '/cmaps/',
+};
+
 type PDFFile = string | File | null;
 
 const minZoom = 100;
@@ -103,6 +107,7 @@ export default function RotateSection({filePDF, onDocumentLoadSuccess, numPages,
         </div>
        
         <Document
+          options={options}
           file={filePDF}
           onLoadSuccess={onDocumentLoadSuccess}
           rotate={0}

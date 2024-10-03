@@ -4,7 +4,6 @@ import HeroText from "@/app/ui/hero-text";
 import UploadBox from "@/app/ui/upload-box";
 import RotateSection from "@/app/ui/rotate-section";
 import '@/app/ui/body.css';
-//import '@/app/promisePolyfills';
 
 import { useState} from 'react';
 
