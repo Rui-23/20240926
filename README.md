@@ -12,7 +12,7 @@
 
 ## <a name="introduction">🤖 Introduction</a>
 
-The **PDF Page Rotator** web app provides an easy and intuitive way to manipulate PDF files. Users can simply upload or drag and drop a PDF, click to rotate pages, and download the rotated version. This is especially useful when dealing with scanned documents or misaligned pages.
+The **⛓️‍💥[PDF Page Rotator](https://20240926-nxjjtpx87-saras-projects-c3e6a64b.vercel.app/)** web app provides an easy and intuitive way to manipulate PDF files. Users can simply upload or drag and drop a PDF, click to rotate pages, and download the rotated version. This is especially useful when dealing with scanned documents or misaligned pages.
 
 ## <a name="tech-stack">⚙️ Tech Stack</a>
 
@@ -40,13 +40,13 @@ Make sure you have the following installed on your machine:
 
 - [Git](https://git-scm.com/)
 - [Node.js](https://nodejs.org/en)
-- [npm](https://www.npmjs.com/) (Node Package Manager)
+- [npm](https://www.npmjs.com/)
 
 **Cloning the Repository**
 
 ```bash
 git clone https://github.com/Rui-23/20240926
-cd pdf-rotator
+cd 20240926
 ```
 
 **Installation**
