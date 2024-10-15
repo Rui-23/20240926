@@ -38,9 +38,34 @@ button[role="tooltip"]:hover::after {
   transform: translateX(-50%) translateY(-5px); /* Add upward push animation */
 }
 
+.loader {
+  position: fixed;
+  top: 20%;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-/* .pdfPage {
-  width: 100%;
-  object-fit: contain 150ms ease-in-out;
-  transition: transform ; 
-} */
+.loader::after {
+  flex-shrink: 0;
+  content: "";
+  width: 60px;
+  height: 60px;
+  background-color: transparent;
+  border: 10px solid silver;
+  border-top-color: cyan;
+  border-radius: 50%;
+  animation: spinner 1s linear infinite; 
+}
+
+ @keyframes spinner {
+  from {
+    transform: rotate(0deg);
+  } 
+  to {
+    transform: rotate(360deg);
+  }
+} 

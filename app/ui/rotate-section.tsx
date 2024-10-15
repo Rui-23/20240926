@@ -5,6 +5,7 @@ import type { PDFDocumentProxy } from 'pdfjs-dist';
 import { useState } from 'react';
 import { PDFDocument, degrees } from 'pdf-lib'; 
 import { saveAs } from 'file-saver';
+import { Suspense } from 'react';
 
 const options = {
   cMapUrl: '/cmaps/',
@@ -28,6 +29,7 @@ interface rotationProps {
 export default function RotateSection({filePDF, onDocumentLoadSuccess, numPages, rotation, rotateAll, rotatePage, removePDF} : rotationProps) {
   const [pageWidth, setPageWidth] = useState<number>(250); 
   //const scaleFactor = pageWidth / 250;
+  const height = Math.floor(pageWidth / (250/300));
 
   const zoomIn = () => {
     setPageWidth((prevWidth) => Math.min(prevWidth + 50, maxZoom)); 
@@ -111,7 +113,7 @@ export default function RotateSection({filePDF, onDocumentLoadSuccess, numPages,
           file={filePDF}
           onLoadSuccess={onDocumentLoadSuccess}
           rotate={0}
-          loading="Loading PDF…" 
+          loading={<div className="loader"></div>} 
           className='flex flex-wrap justify-center mt-5'
         >
           {Array.from(new Array(numPages), (el, index) => ( 
@@ -157,8 +159,6 @@ export default function RotateSection({filePDF, onDocumentLoadSuccess, numPages,
                           renderAnnotationLayer = {false}
                           renderTextLayer={false}
                           width={pageWidth-30}
-                          // width={500}
-                          // scale={0.5}
                           onClick={() => rotatePage(index + 1)}
                           renderMode='canvas'
                         />
@@ -170,7 +170,7 @@ export default function RotateSection({filePDF, onDocumentLoadSuccess, numPages,
             </div> ),
           )}
         </Document>
-
+       
         <div 
           className="flex flex-col justify-center items-center space-y-3 select-none text-[16px] font-medium mt-5">
           <button 
